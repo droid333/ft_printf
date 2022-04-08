@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/08 06:08:10 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/09 00:55:12 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_putstr(char *str)
 		ft_putchar(*str++);
 }
 */
+
 /*
 size_t	ft_strlen(const char *s)
 {
@@ -39,55 +40,114 @@ size_t	ft_strlen(const char *s)
 }
 */
 
-int	ft_check(const char *c)
+/*
+//void	ft_check_flags(const char *s)
+void	ft_check_flags(char *s)
 {
-	//char	*ptr;
-	//int		i;
-	(void)c;
+	int	check;
 
-	/*ptr = malloc(sizeof(*ptr) * 3);
-	if (!ptr)
-		return (0);
-	i = 0;
-	while (i < 2)
+	check = 1;
+	while (check)
 	{
-		ptr[i] = 'W';
-		ft_putchar(ptr[i]);
-		i++;
+		check = 0;
+		if (*s == '-' || *s == '0' || *s == '.' || *s == '#' || *s == ' ' || *s == '+')
+			check = 1;
+			s++;
 	}
-	ptr[i] = '\0';
-	free(ptr);*/
+	// switch?
+}
+*/
 
-	// TODO
-	// tester les flags
-	// LES COMPRENDRE DEJA...
-	// tester les %cds....
-	return (1);
+/*
+char	*ft_test(char *s)
+{
+	s++;
+	return (s);
+}
+*/
+
+void	ft_check_format(char *s)
+{
+	va_list	ap;
+	int		d;
+
+	va_start(ap, s);
+	while (*s)
+	{
+		switch (*s)
+		{
+			case 'd':
+				d = va_arg(ap, int);
+				printf("int %d\n", d);
+		}
+		s++;
+	}
+	va_end(ap);
 }
 
-int	ft_printf(const char *s, ...)
+int	ft_printf(const char *str, ...)
 {
+	char	*s;
+	//char	*z;
+	
+	//va_list	ap;
+	//int		d;
+
+	s = (char *)str;
 	while (*s)
 	{
 		if (*s == '%')
 		{
 			s++;
-			ft_check(s);
+			//z = ft_check(s);
+			//s = z;
+
+			//ft_check_flags(s);
+			//ft_check_width(s);
+			//ft_check_precision(s);
+			
+			ft_check_format(s);
 		}
+
 		ft_putchar(*s);
 		s++;
 	}
 	return (0);
 }
 
+void	foo(char *fmt, ...)
+	   {
+		   va_list ap;
+		   int d;
+		   char	c, *s;
+
+		   va_start(ap,	fmt);
+		   while (*fmt)
+			   switch(*fmt++) {
+			   case	's':			   /* string */
+				   s = va_arg(ap, char *);
+				   printf("string %s\n", s);
+				   break;
+			   case	'd':			   /* int */
+				   d = va_arg(ap, int);
+				   //printf("int %d\n", d);
+				   break;
+			   case	'c':			   /* char */
+				   /* Note: char is promoted to	int. */
+				   c = va_arg(ap, int);
+				   //printf("char	%c\n", c);
+				   break;
+			   }
+		   va_end(ap);
+	   }
+
 int	main(void)
 {
-	//int test1 = 12;
-	//char test2 = 'a';
-	//char *test3 = "salut";
-
-	//printf("to%%%%to\n");
-	ft_printf("to%ti");
+	//printf("%09.2fiii\n", 12.3);
+	//printf("%5d\n", 12);
+	
+	//ft_printf("to%%ti");
+	foo("s coucou .", "tutu");
 	return (0);
 }
 
