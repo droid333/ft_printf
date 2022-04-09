@@ -6,16 +6,13 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/09 00:55:12 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/09 04:15:10 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "ft_printf.h"
 
-void	ft_putchar(char c)
+static void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
@@ -66,7 +63,7 @@ char	*ft_test(char *s)
 }
 */
 
-void	ft_check_format(char *s)
+/*void	ft_check_format(char *s)
 {
 	va_list	ap;
 	int		d;
@@ -83,7 +80,7 @@ void	ft_check_format(char *s)
 		s++;
 	}
 	va_end(ap);
-}
+}*/
 
 int	ft_printf(const char *str, ...)
 {
@@ -106,7 +103,7 @@ int	ft_printf(const char *str, ...)
 			//ft_check_width(s);
 			//ft_check_precision(s);
 			
-			ft_check_format(s);
+			//ft_check_format(s);
 		}
 
 		ft_putchar(*s);
@@ -116,30 +113,31 @@ int	ft_printf(const char *str, ...)
 }
 
 void	foo(char *fmt, ...)
-	   {
-		   va_list ap;
-		   int d;
-		   char	c, *s;
+{
+	va_list ap;
+	int d;
+	char	c, *s;
 
-		   va_start(ap,	fmt);
-		   while (*fmt)
-			   switch(*fmt++) {
-			   case	's':			   /* string */
-				   s = va_arg(ap, char *);
-				   printf("string %s\n", s);
-				   break;
-			   case	'd':			   /* int */
-				   d = va_arg(ap, int);
-				   //printf("int %d\n", d);
-				   break;
-			   case	'c':			   /* char */
-				   /* Note: char is promoted to	int. */
-				   c = va_arg(ap, int);
-				   //printf("char	%c\n", c);
-				   break;
-			   }
-		   va_end(ap);
-	   }
+	va_start(ap,	fmt);
+	while (*fmt)
+		switch(*fmt++) 
+		{
+			case	's':			   /* string */
+				s = va_arg(ap, char *);
+				printf("string %s\n", s);
+				break;
+			case	'd':			   /* int */
+				d = va_arg(ap, int);
+				//printf("int %d\n", d);
+				break;
+			case	'c':			   /* char */
+				/* Note: char is promoted to	int. */
+				c = va_arg(ap, int);
+				//printf("char	%c\n", c);
+				break;
+		}
+		va_end(ap);
+}
 
 int	main(void)
 {
@@ -148,6 +146,7 @@ int	main(void)
 	
 	//ft_printf("to%%ti");
 	foo("s coucou .", "tutu");
+	ft_putchar_fd('C', 1);
 	return (0);
 }
 
