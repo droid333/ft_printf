@@ -6,15 +6,15 @@
 #    By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/09 02:17:12 by slucas            #+#    #+#              #
-#    Updated: 2022/04/09 04:28:14 by slucas           ###   ########.fr        #
+#    Updated: 2022/04/15 00:40:55 by slucas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
 
-SRC		= ft_printf.c
+SRCS	= ft_printf.c
 
-OBJ		= $(SRC:.c=.o)
+OBJS	= $(SRCS:.c=.o)
 
 CC		= gcc
 
@@ -26,27 +26,26 @@ CFLAGS	= -Wall -Wextra -Werror
 
 LIBFT	= libft
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 	echo "it's OK!"
-
-$(LIBFT):
-	$(MAKE) -C $@
-#	$(MAKE) clean -C $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -I. $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
+	$(MAKE) -C $(LIBFT)
+	cp ./libft/libft.a $(NAME)
+	$(RM) ./libft/libft.a
 	$(AR) $@ $^
 
 clean:
-	$(RM) $(OBJ)
 	$(MAKE) clean -C $(LIBFT)
+	$(RM) $(OBJS)
 
 fclean: clean
+	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
 	$(RM) a.out
-	$(MAKE) fclean -C $(LIBFT)
 
 re: fclean all
 

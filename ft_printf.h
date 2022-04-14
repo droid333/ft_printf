@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 02:37:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/09 04:00:38 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/15 00:29:24 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-#include "libft/libft.h"
+# include "libft/libft.h"
+
+int	ft_printf(const char *fmt, ...);
 
 #endif

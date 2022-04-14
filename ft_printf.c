@@ -6,39 +6,13 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/09 04:15:10 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/15 00:31:52 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 /*
-void	ft_putstr(char *str)
-{
-	while (*str)
-		ft_putchar(*str++);
-}
-*/
-
-/*
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-*/
-
-/*
-//void	ft_check_flags(const char *s)
 void	ft_check_flags(char *s)
 {
 	int	check;
@@ -55,98 +29,87 @@ void	ft_check_flags(char *s)
 }
 */
 
-/*
-char	*ft_test(char *s)
+static int	ft_search(const char *set, char c)
 {
-	s++;
-	return (s);
-}
-*/
-
-/*void	ft_check_format(char *s)
-{
-	va_list	ap;
-	int		d;
-
-	va_start(ap, s);
-	while (*s)
+	while (*set)
 	{
-		switch (*s)
-		{
-			case 'd':
-				d = va_arg(ap, int);
-				printf("int %d\n", d);
-		}
-		s++;
+		if (*set == c)
+			return (1);
+		set++;
 	}
-	va_end(ap);
-}*/
+	return (0);
+}
 
-int	ft_printf(const char *str, ...)
+static int	ft_count(const char *s, const char *flags, const char *set)
 {
-	char	*s;
-	//char	*z;
-	
-	//va_list	ap;
-	//int		d;
+	int	count;
 
-	s = (char *)str;
+	count = 0;
 	while (*s)
 	{
 		if (*s == '%')
 		{
 			s++;
+			while (ft_search(flags, *s))
+				s++;
+			if (ft_search(set, *s))
+				count++;
+		}
+		s++;
+	}
+	return (count);
+}
+
+int	ft_printf(const char *fmt, ...)
+{
+	char	*flags;
+	char	*set;
+	int		nb;
+	int		d;
+	va_list	ap;
+
+	flags = "-0.+ #";
+	set = "cspdiuxX%";
+	nb = ft_count(fmt, flags, set);
+	va_start(ap, fmt);
+	while (*fmt)
+	{
 			//z = ft_check(s);
 			//s = z;
 
 			//ft_check_flags(s);
 			//ft_check_width(s);
 			//ft_check_precision(s);
-			
 			//ft_check_format(s);
+		if (*fmt == '%')
+		{
+			switch (*++fmt) // pas le droit au switch...
+			{
+				case 'd':
+					d = va_arg(ap, int);
+					//s = va_arg(ap, char *);
+					// Note: char is promoted to	int.
+					//c = va_arg(ap, int);
+					ft_putnbr_fd(d, 1);
+					break ;
+			}
+			va_end(ap);
 		}
-
-		ft_putchar(*s);
-		s++;
+		else
+			ft_putchar_fd(*fmt, 1);
+		fmt++;
 	}
 	return (0);
-}
-
-void	foo(char *fmt, ...)
-{
-	va_list ap;
-	int d;
-	char	c, *s;
-
-	va_start(ap,	fmt);
-	while (*fmt)
-		switch(*fmt++) 
-		{
-			case	's':			   /* string */
-				s = va_arg(ap, char *);
-				printf("string %s\n", s);
-				break;
-			case	'd':			   /* int */
-				d = va_arg(ap, int);
-				//printf("int %d\n", d);
-				break;
-			case	'c':			   /* char */
-				/* Note: char is promoted to	int. */
-				c = va_arg(ap, int);
-				//printf("char	%c\n", c);
-				break;
-		}
-		va_end(ap);
+	//return (nb);
 }
 
 int	main(void)
 {
-	//printf("%09.2fiii\n", 12.3);
-	//printf("%5d\n", 12);
-	
-	//ft_printf("to%%ti");
-	foo("s coucou .", "tutu");
-	ft_putchar_fd('C', 1);
+	//int	num = 12;
+	int	i = 10;
+
+	printf("number is: [%-d], good.\n", i);
+	//ft_printf("number is: [%5d], good.\n", num);
 	return (0);
 }
 

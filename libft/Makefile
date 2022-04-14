@@ -6,15 +6,13 @@
 #    By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/11 18:02:58 by slucas            #+#    #+#              #
-#    Updated: 2022/04/09 01:29:15 by slucas           ###   ########.fr        #
+#    Updated: 2022/04/15 00:38:37 by slucas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
-# RADICAL	= atoi.c \
-
-SRC		= ft_atoi.c \
+SRCS	= ft_atoi.c \
 		  ft_bzero.c \
 		  ft_calloc.c \
 		  ft_isalnum.c \
@@ -47,19 +45,14 @@ SRC		= ft_atoi.c \
 		  ft_putchar_fd.c \
 		  ft_putstr_fd.c \
 		  ft_putendl_fd.c \
-		  ft_putnbr_fd.c
-
-# SRC		= $(addprefix ft_, $(RADICAL))
-
-SRC_B	= ft_lstnew.c \
+		  ft_putnbr_fd.c \
+		  ft_lstnew.c \
 		  ft_lstadd_front.c \
 		  ft_lstsize.c \
 		  ft_lstlast.c \
 		  ft_lstadd_back.c
 
-OBJ		= $(SRC:.c=.o)
-
-OBJ_B	= $(SRC_B:.c=.o)
+OBJS	= $(SRCS:.c=.o)
 
 CC		= gcc
 
@@ -74,14 +67,11 @@ all: $(NAME)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -I. $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	$(AR) $@ $^
 
-bonus: $(OBJ_B)
-	$(AR) $(NAME) $^
-
 clean:
-	$(RM) $(OBJ) $(OBJ_B)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
