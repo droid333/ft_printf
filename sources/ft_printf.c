@@ -6,11 +6,11 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/15 00:31:52 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/26 07:48:46 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 /*
 void	ft_check_flags(char *s)
@@ -62,15 +62,11 @@ static int	ft_count(const char *s, const char *flags, const char *set)
 
 int	ft_printf(const char *fmt, ...)
 {
-	char	*flags;
-	char	*set;
 	int		nb;
 	int		d;
 	va_list	ap;
 
-	flags = "-0.+ #";
-	set = "cspdiuxX%";
-	nb = ft_count(fmt, flags, set);
+	nb = ft_count(fmt, FLAGS, SET);
 	va_start(ap, fmt);
 	while (*fmt)
 	{
@@ -99,17 +95,6 @@ int	ft_printf(const char *fmt, ...)
 			ft_putchar_fd(*fmt, 1);
 		fmt++;
 	}
-	return (0);
-	//return (nb);
+	//return (0);
+	return (nb);
 }
-
-int	main(void)
-{
-	//int	num = 12;
-	int	i = 10;
-
-	printf("number is: [%-d], good.\n", i);
-	//ft_printf("number is: [%5d], good.\n", num);
-	return (0);
-}
-

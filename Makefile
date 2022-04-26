@@ -6,13 +6,15 @@
 #    By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/09 02:17:12 by slucas            #+#    #+#              #
-#    Updated: 2022/04/15 00:40:55 by slucas           ###   ########.fr        #
+#    Updated: 2022/04/26 06:39:35 by slucas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
 
-SRCS	= ft_printf.c
+SRCS_F	= ft_printf.c
+
+SRCS	= $(addprefix sources/, $(SRCS_F))
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -30,7 +32,7 @@ all: $(NAME)
 	echo "it's OK!"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -I. $< -o $@
+	$(CC) $(CFLAGS) -c -I./includes $< -o $@
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
@@ -43,7 +45,7 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT)
+#	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
 	$(RM) a.out
 
