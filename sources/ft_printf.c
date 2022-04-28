@@ -6,29 +6,30 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/26 07:48:46 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/28 11:38:55 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-/*
-void	ft_check_flags(char *s)
+t_flags	*ft_init_flags(t_flags *flags)
 {
-	int	check;
+	flags->minus = 0;
+	flags->zero = 0;
+	flags->dot = 0;
+	flags->sharp = 0;
+	flags->space = 0;
+	flags->sign = 0;
+	flags->width = 0;
+	flags->precision = 0;
 
-	check = 1;
-	while (check)
-	{
-		check = 0;
-		if (*s == '-' || *s == '0' || *s == '.' || *s == '#' || *s == ' ' || *s == '+')
-			check = 1;
-			s++;
-	}
-	// switch?
+	flags->length = 0;
+	flags->percent = 0;
+
+	return (flags);
 }
-*/
 
+/*
 static int	ft_search(const char *set, char c)
 {
 	while (*set)
@@ -59,42 +60,96 @@ static int	ft_count(const char *s, const char *flags, const char *set)
 	}
 	return (count);
 }
+*/
+
+char	ft_eval_fmt(const char *s, t_flags *f, int i)
+{
+	while (s[i] != 'c' || s[i] != 's' || s[i] != 'p' || s[i] != 'd' 
+			|| s[i] != 'i' || s[i] != 'u' || s[i] != 'x' || s[i] != 'X' 
+			|| s[i] != '%')
+	{
+		if (s[i] == '-')
+		{
+			f->minus = 1;
+			i++;
+		}
+		if (s[i] == '0')
+		{
+			f->zero = 1;
+			i++;
+		}
+		if (s[i] == '.')
+		{
+			f->dot = 1;
+			i++;
+		}
+		if (s[i] == '#')
+		{
+			f->sharp = 1;
+			i++;
+		}
+		if (s[i] == ' ')
+		{
+			f->space = 1;
+			i++;
+		}
+		if (s[i] == '+')
+		{
+			f->sign = 1;
+			i++;
+		}
+		if (s[i] >= '0' && s[i] <= '9' && f->dot == 0)
+		{
+			f->width = f->width * 10 + (s[i] - 0);
+			i++;
+		}
+		if (s[i] >= '0' && s[i] <= '9' && f->dot == 1)
+		{
+			f->precision = f->precision * 10 + (s[i] - 0);
+			i++;
+		}
+		/*if (s[i] == '%')
+		{
+			f->percent = 1;
+			i++;
+		}*/
+	}
+	return (s[i]);
+}
 
 int	ft_printf(const char *fmt, ...)
 {
-	int		nb;
-	int		d;
-	va_list	ap;
+	t_flags	*flags;
+	int		result;
+	int		i;
 
-	nb = ft_count(fmt, FLAGS, SET);
-	va_start(ap, fmt);
-	while (*fmt)
+	flags = malloc(sizeof(*flags));
+	if (!flags)
+		return (0x0);
+
+	ft_init_flags(flags);
+
+	//int		nb;
+	//int		d;
+	//va_list	ap2;
+	//nb = ft_count(fmt, FLAGS, SET);
+
+	va_start(flags->ap, fmt);
+	i = -1;
+	result = 0;
+	while (fmt[++i])
 	{
-			//z = ft_check(s);
-			//s = z;
-
-			//ft_check_flags(s);
-			//ft_check_width(s);
-			//ft_check_precision(s);
-			//ft_check_format(s);
-		if (*fmt == '%')
+		if (fmt[i] == '%')
 		{
-			switch (*++fmt) // pas le droit au switch...
-			{
-				case 'd':
-					d = va_arg(ap, int);
-					//s = va_arg(ap, char *);
-					// Note: char is promoted to	int.
-					//c = va_arg(ap, int);
-					ft_putnbr_fd(d, 1);
-					break ;
-			}
-			va_end(ap);
+			ft_eval_fmt(fmt, flags, i + 1);
 		}
 		else
-			ft_putchar_fd(*fmt, 1);
-		fmt++;
+			result += write(1, &fmt[i], 1);
+			//ft_putchar_fd(*fmt, 1);
+		//fmt++;
 	}
-	//return (0);
-	return (nb);
+	va_end(flags->ap);
+	result += flags->length;
+	free(flags);
+	return (result);
 }
