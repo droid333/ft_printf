@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 02:37:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/04/28 07:09:10 by slucas           ###   ########.fr       */
+/*   Updated: 2022/04/29 10:30:04 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 # define FLAGS "-0.+ #"
 # define SET "cspdiuxX%"
 
-typedef struct	s_flags
+typedef struct s_flags
 {
 	va_list	ap;
+	int		sharp;
 	int		minus;
+	int		sign;
+	int		space;
 	int		zero;
 	int		dot;
-	int		sharp;
-	int		space;
-	int		sign;
 	int		width;
 	int		precision;
 
