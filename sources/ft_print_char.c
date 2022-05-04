@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 06:50:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/04 10:48:39 by slucas           ###   ########.fr       */
+/*   Created: 2022/05/04 09:50:25 by slucas            #+#    #+#             */
+/*   Updated: 2022/05/04 10:53:39 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int	main(void)
+void	ft_print_char(t_flags *flags)
 {
-	char	c = 'T';
-	int		res = printf("Hello %c\n", c);
-	int		res2 = ft_printf("Hello %c\n", c);
+	char	c;
 
-	printf("res = %d\n", res);
-	printf("res2 = %d\n", res2);
-	return (0);
+	c = va_arg(flags->ap, int);
+	//(flags->length)++;
+	//write(1, &c, 1);
+	flags->length += write(1, &c, 1);
 }
-

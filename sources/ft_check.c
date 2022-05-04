@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 06:50:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/04 10:48:39 by slucas           ###   ########.fr       */
+/*   Created: 2022/05/04 08:45:47 by slucas            #+#    #+#             */
+/*   Updated: 2022/05/04 10:49:41 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int	main(void)
+void	ft_check_fmt(const char *c, t_flags *flags)
 {
-	char	c = 'T';
-	int		res = printf("Hello %c\n", c);
-	int		res2 = ft_printf("Hello %c\n", c);
-
-	printf("res = %d\n", res);
-	printf("res2 = %d\n", res2);
-	return (0);
+	if (*c == 'c')
+	{
+		//printf("CCC\n");
+		ft_print_char(flags);
+	}
+	if (*c == 's')
+		printf("SSS\n");
+	if (*c == 'p')
+		printf("PPP\n");
+	if (*c == 'd' || *c == 'i')
+		printf("DDD");
+	if (*c == 'u')
+		printf("UUU");
+	if (*c == 'x' || *c == 'X')
+		printf("xXx");
+	if (*c == '%')
+		printf("%%%%%%");
 }
-
