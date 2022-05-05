@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 02:37:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/04 10:47:31 by slucas           ###   ########.fr       */
+/*   Updated: 2022/05/05 08:27:57 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_flags	*ft_init_flags(t_flags *flags);
 int		ft_eval_fmt(const char *s, t_flags *flags, int i);
 void	ft_check_fmt(const char *c, t_flags *flags);
 void	ft_print_char(t_flags *flags);
+void	ft_print_str(t_flags *flags);
+void	ft_print_ptr(t_flags *flags);
 int		ft_printf(const char *fmt, ...);
 
 #endif

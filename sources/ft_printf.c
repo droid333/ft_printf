@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/04 08:28:11 by slucas           ###   ########.fr       */
+/*   Updated: 2022/05/05 07:59:27 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_printf(const char *fmt, ...)
 	{
 		if (fmt[i] == '%')
 		{
+			//ft_init_flags(flags);
 			i = ft_eval_fmt(fmt, flags, i + 1);
 		}
 		else

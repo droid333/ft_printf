@@ -6,7 +6,7 @@
 #    By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/09 02:17:12 by slucas            #+#    #+#              #
-#    Updated: 2022/05/04 09:48:17 by slucas           ###   ########.fr        #
+#    Updated: 2022/05/05 08:26:23 by slucas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME	= libftprintf.a
 SRCS_F	= ft_printf.c \
 		  ft_flags.c \
 		  ft_check.c \
-		  ft_print_char.c
+		  ft_print_char.c \
+		  ft_print_str.c \
+		  ft_print_ptr.c
 
 SRCS	= $(addprefix sources/, $(SRCS_F))
 

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check.c                                         :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 08:45:47 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/05 08:23:24 by slucas           ###   ########.fr       */
+/*   Created: 2022/05/05 07:54:39 by slucas            #+#    #+#             */
+/*   Updated: 2022/05/05 08:21:21 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	ft_check_fmt(const char *c, t_flags *flags)
+static int	ft_putstr(char *s)
 {
-	if (*c == 'c')
-		ft_print_char(flags);
-	if (*c == 's')
-		ft_print_str(flags);
-	if (*c == 'p')
-		ft_print_ptr(flags);
-	if (*c == 'd' || *c == 'i')
-		printf("DDD");
-	if (*c == 'u')
-		printf("UUU");
-	if (*c == 'x' || *c == 'X')
-		printf("xXx");
-	if (*c == '%')
-		printf("%%%%%%");
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	write(1, s, i);
+	return (i);
+}
+
+void	ft_print_str(t_flags *flags)
+{
+	char	*s;
+
+	s = va_arg(flags->ap, char *);
+	flags->length += ft_putstr(s);
 }
