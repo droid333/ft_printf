@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 08:23:57 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/18 10:29:20 by slucas           ###   ########.fr       */
+/*   Created: 2022/05/18 10:33:15 by slucas            #+#    #+#             */
+/*   Updated: 2022/05/18 12:36:58 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,36 @@ static int	ft_putchar(char c)
 	return (i);
 }
 
-static int	ft_putaddr(unsigned long p)
+static int	ft_putnbr(int n, int *count)
 {
-	static int	i;
-
-	i = 0;
-	if (p >= 16)
-		ft_putaddr(p / 16);
-	i += ft_putchar(BASE[p % 16]);
-	return (i);
+	// unsigned int	nb
+	// put char '-'
+	// nb = -n
+	if (n == -2147483648)
+	{
+		*count += write(1, "-2", 2);
+		ft_putnbr(147483648, count);
+	}
+	else
+	{
+		if (n < 0)
+		{
+			*count += ft_putchar('-');
+			n = -n;
+		}
+		if (n >= 10)
+			ft_putnbr(n / 10, count);
+		*count += ft_putchar(n % 10 + '0');
+	}
+	return (*count);
 }
 
-void	ft_print_ptr(t_flags *flags)
+void	ft_print_nbr(t_flags *flags)
 {
-	unsigned long	p;
+	int	n;
+	int	count;
 
-	p = va_arg(flags->ap, unsigned long);
-	flags->length += write(1, "0x", 2);
-	flags->length += ft_putaddr(p);
+	count = 0;
+	n = va_arg(flags->ap, int);
+	flags->length += ft_putnbr(n, &count);
 }

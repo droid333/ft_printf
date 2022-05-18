@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
+/*   ft_print_u_nbr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 08:23:57 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/18 10:29:20 by slucas           ###   ########.fr       */
+/*   Created: 2022/05/18 13:03:26 by slucas            #+#    #+#             */
+/*   Updated: 2022/05/18 13:42:12 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,26 @@ static int	ft_putchar(char c)
 	return (i);
 }
 
-static int	ft_putaddr(unsigned long p)
+static int	ft_putunbr(unsigned int u, int *count)
 {
-	static int	i;
-
-	i = 0;
-	if (p >= 16)
-		ft_putaddr(p / 16);
-	i += ft_putchar(BASE[p % 16]);
-	return (i);
+	/*if (u < 0)
+	{
+		// rien a faire ??
+	}*/
+	if (u >= 10)
+	{
+		ft_putunbr(u / 10, count);
+	}
+	*count += ft_putchar(u % 10 + '0');
+	return (*count);
 }
 
-void	ft_print_ptr(t_flags *flags)
+void	ft_print_u_nbr(t_flags *flags)
 {
-	unsigned long	p;
+	unsigned int	u;
+	int				count;
 
-	p = va_arg(flags->ap, unsigned long);
-	flags->length += write(1, "0x", 2);
-	flags->length += ft_putaddr(p);
+	count = 0;
+	u = va_arg(flags->ap, unsigned int);
+	flags->length += ft_putunbr(u, &count);
 }

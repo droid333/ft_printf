@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 02:37:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/05 08:27:57 by slucas           ###   ########.fr       */
+/*   Updated: 2022/05/18 13:02:02 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 # define FLAGS "-0.+ #"
 # define SET "cspdiuxX%"
+
+# define BASE "0123456789abcdef"
+//# define BASE10 "0123456789"
 
 typedef struct s_flags
 {
@@ -46,6 +49,8 @@ void	ft_check_fmt(const char *c, t_flags *flags);
 void	ft_print_char(t_flags *flags);
 void	ft_print_str(t_flags *flags);
 void	ft_print_ptr(t_flags *flags);
+void	ft_print_nbr(t_flags *flags);
+void	ft_print_u_nbr(t_flags *flags);
 int		ft_printf(const char *fmt, ...);
 
 #endif

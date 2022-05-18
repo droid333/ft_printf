@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:45:47 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/05 08:23:24 by slucas           ###   ########.fr       */
+/*   Updated: 2022/05/18 13:01:18 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_check_fmt(const char *c, t_flags *flags)
 	if (*c == 'p')
 		ft_print_ptr(flags);
 	if (*c == 'd' || *c == 'i')
-		printf("DDD");
+		ft_print_nbr(flags);
 	if (*c == 'u')
-		printf("UUU");
+		ft_print_u_nbr(flags);
 	if (*c == 'x' || *c == 'X')
 		printf("xXx");
 	if (*c == '%')

@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 06:50:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/05/11 06:25:19 by slucas           ###   ########.fr       */
+/*   Updated: 2022/05/18 13:28:03 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	main(void)
 {
-	unsigned long t;
-	t = 20500;
+	unsigned int	t = -10;
+	//unsigned int	t = -2147483647;
 
-	int		res = printf("Hello %p\n", &t);
-	int		res2 = ft_printf("Hello %p\n", &t);
+	int		res = printf("Hello %u\n", t);
+	int		res2 = ft_printf("Hello %u\n", t);
 
-	printf("--- %c ---\n", 20500 / 4096 + '0');
+	printf("--- %c ---\n", 20500 / 4096 + 'a');
 	printf("res = %d\n", res);
 	printf("res2 = %d\n", res2);
 	return (0);
