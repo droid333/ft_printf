@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_check_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 07:54:39 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/16 03:50:51 by slucas           ###   ########.fr       */
+/*   Created: 2022/05/04 08:45:47 by slucas            #+#    #+#             */
+/*   Updated: 2022/06/16 05:18:38 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_printf_bonus.h"
 
-static int	ft_putstr(char *s)
+void	ft_check_fmt(const char *c, t_flags *flags)
 {
-	int	i;
-
-	if (s == NULL)
-		i = write(1, "(null)", 6);
-	else
-	{
-		i = 0;
-		while (s[i])
-			i++;
-		write(1, s, i);
-	}
-	return (i);
-}
-
-void	ft_print_str(t_flags *flags)
-{
-	char	*s;
-
-	//if (*s)
-
-	s = va_arg(flags->ap, char *);
-	flags->length += ft_putstr(s);
+	if (*c == 'c')
+		ft_print_char(flags);
+	if (*c == 's')
+		ft_print_str(flags);
+	if (*c == 'p')
+		ft_print_ptr(flags);
+	if (*c == 'd' || *c == 'i')
+		ft_print_nbr(flags);
+	if (*c == 'u')
+		ft_print_u_nbr(flags);
+	if (*c == 'x' || *c == 'X')
+		ft_print_hex(flags, *c);
+	if (*c == '%')
+		flags->length += write(1, "%", 1);
 }

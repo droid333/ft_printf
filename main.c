@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 06:50:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/09 16:28:35 by slucas           ###   ########.fr       */
+/*   Updated: 2022/06/16 04:57:55 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 int	main(void)
 {
-	unsigned int	t = -10;
+	//char str[] = "toto";
+	unsigned int	t = 2;
 	//unsigned int	t = -2147483647;
 
-	int		res = printf("Hello %u\n", t);
-	int		res2 = ft_printf("Hello %u\n", t);
+	int		res = printf("%+d %+d\n", t, -5);
+	int		res2 = ft_printf("%+d %+d\n", t, -5);
 
-	printf("--- %c ---\n", 20500 / 4096 + 'a');
+	//printf("--- %c ---\n", 20500 / 4096 + 'a');
 	printf("res = %d\n", res);
 	printf("res2 = %d\n", res2);
 
-	printf("%.5d\n", 5);
+	//printf("%.5d\n", 5);
 	return (0);
 }
 

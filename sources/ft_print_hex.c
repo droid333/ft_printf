@@ -1,39 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 07:54:39 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/16 03:50:51 by slucas           ###   ########.fr       */
+/*   Created: 2022/06/16 02:52:43 by slucas            #+#    #+#             */
+/*   Updated: 2022/06/16 03:22:16 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int	ft_putstr(char *s)
+static int	ft_putchar(char c)
 {
 	int	i;
 
-	if (s == NULL)
-		i = write(1, "(null)", 6);
-	else
-	{
-		i = 0;
-		while (s[i])
-			i++;
-		write(1, s, i);
-	}
+	i = 0;
+	i+= write(1, &c, 1);
 	return (i);
 }
 
-void	ft_print_str(t_flags *flags)
+static int	ft_puthex(unsigned int h, int *count, const char c)
 {
-	char	*s;
+	if (h >= 16)
+		ft_puthex(h / 16, count, c);
+	if (c == 'x')
+		*count += ft_putchar(BASE_x[h % 16]);
+	else
+		*count += ft_putchar(BASE_X[h % 16]);
 
-	//if (*s)
+	return (*count);
+}
 
-	s = va_arg(flags->ap, char *);
-	flags->length += ft_putstr(s);
+void	ft_print_hex(t_flags *flags, const char c)
+{
+	unsigned int	h;
+	int	count;
+
+	count = 0;
+	h = va_arg(flags->ap, unsigned int);
+	flags->length += ft_puthex(h, &count, c);
 }
