@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 07:54:39 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/16 03:50:51 by slucas           ###   ########.fr       */
+/*   Updated: 2022/06/17 06:25:05 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ static int	ft_putstr(char *s)
 	return (i);
 }
 
-void	ft_print_str(t_flags *flags)
+void	ft_print_str(va_list *ap, int *length)
 {
 	char	*s;
 
-	//if (*s)
-
-	s = va_arg(flags->ap, char *);
-	flags->length += ft_putstr(s);
+	s = va_arg(*ap, char *);
+	*length += ft_putstr(s);
 }

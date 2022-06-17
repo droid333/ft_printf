@@ -6,14 +6,13 @@
 #    By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/09 02:17:12 by slucas            #+#    #+#              #
-#    Updated: 2022/06/16 05:31:28 by slucas           ###   ########.fr        #
+#    Updated: 2022/06/17 06:13:28 by slucas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
 
 SRCS_F	= ft_printf.c \
-		  ft_flags.c \
 		  ft_check.c \
 		  ft_print_char.c \
 		  ft_print_str.c \
@@ -44,7 +43,6 @@ CFLAGS	= -Wall -Wextra -Werror
 LIBFT	= libft
 
 all: $(NAME)
-	echo "it's OK!"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -I./includes $< -o $@
