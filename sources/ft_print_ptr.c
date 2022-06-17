@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 08:23:57 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/17 06:48:35 by slucas           ###   ########.fr       */
+/*   Updated: 2022/06/17 08:06:23 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int	ft_putaddr(unsigned long p)
 {
-	static int	i;
+	static int	count;
 
-	i = 0;
+	count = 0;
 	if (p >= 16)
 		ft_putaddr(p / 16);
-	i += ft_putchar(BASE[p % 16]);
-	return (i);
+	count += ft_putchar(BASE[p % 16]);
+	return (count);
 }
 
 void	ft_print_ptr(va_list *ap, int *length)

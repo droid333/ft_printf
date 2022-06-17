@@ -6,7 +6,7 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 06:50:18 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/17 07:05:44 by slucas           ###   ########.fr       */
+/*   Updated: 2022/06/17 07:32:04 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	main(void)
 {
 	//char str[] = "toto";
-	int	t = -247;
+	int	t = -247789;
 	//unsigned int	t = -2147483647;
 
 	int		res = printf("%d\n", t);
