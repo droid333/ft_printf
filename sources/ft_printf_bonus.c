@@ -6,44 +6,20 @@
 /*   By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:34:42 by slucas            #+#    #+#             */
-/*   Updated: 2022/06/16 05:17:31 by slucas           ###   ########.fr       */
+/*   Updated: 2022/06/17 12:14:26 by slucas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf_bonus.h"
 
-/*
-static int	ft_search(const char *set, char c)
+int	ft_putchar(char c)
 {
-	while (*set)
-	{
-		if (*set == c)
-			return (1);
-		set++;
-	}
-	return (0);
-}
+	int	i;
 
-static int	ft_count(const char *s, const char *flags, const char *set)
-{
-	int	count;
-
-	count = 0;
-	while (*s)
-	{
-		if (*s == '%')
-		{
-			s++;
-			while (ft_search(flags, *s))
-				s++;
-			if (ft_search(set, *s))
-				count++;
-		}
-		s++;
-	}
-	return (count);
+	i = 0;
+	i += write(1, &c, 1);
+	return (i);
 }
-*/
 
 int	ft_printf(const char *fmt, ...)
 {
@@ -54,14 +30,6 @@ int	ft_printf(const char *fmt, ...)
 	flags = malloc(sizeof(*flags));
 	if (!flags)
 		return (0x0);
-
-	//ft_init_flags(flags);
-
-	//int		nb;
-	//int		d;
-	//va_list	ap2;
-	//nb = ft_count(fmt, FLAGS, SET);
-
 	va_start(flags->ap, fmt);
 	flags->length = 0;
 	i = -1;

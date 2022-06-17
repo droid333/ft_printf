@@ -6,7 +6,7 @@
 #    By: slucas <slucas@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/09 02:17:12 by slucas            #+#    #+#              #
-#    Updated: 2022/06/17 06:13:28 by slucas           ###   ########.fr        #
+#    Updated: 2022/06/17 12:38:05 by slucas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS	= $(addprefix sources/, $(SRCS_F))
 SRCS_B	= sources/ft_printf_bonus.c \
 		  sources/ft_flags_bonus.c \
 		  sources/ft_check_bonus.c \
-		  sources/ft_print_nbr_bonus.c
+		  sources/ft_print_nbr_bonus.c \
+		  sources/ft_print_hex_bonus.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -64,7 +65,6 @@ clean:
 	$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
-#	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
 	$(RM) a.out
 
